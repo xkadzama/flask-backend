@@ -25,7 +25,10 @@ def change_username():
     return render_template('change_username.html')
 
 
-
+# git add . (добавить измененные файлы в промежуточное измерение)
+# git status (проверить добавились ли они)
+# git commit -m "комментарий к изменениям"
+# git push (отправить на удаленный реп. - GitHub)
 
 
 
