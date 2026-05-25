@@ -1,0 +1,307 @@
+Вот полноценный современный `register.css` в темно-синих тонах с premium UI/UX стилем: glassmorphism, glow-эффекты, плавные hover/focus-анимации, адаптивность и аккуратная типографика.
+Подходит под Flask/WTF без изменения backend-логики.
+
+```css
+/* ============================= */
+/*         GOOGLE FONT           */
+/* ============================= */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* ============================= */
+/*            RESET              */
+/* ============================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ============================= */
+/*             BODY              */
+/* ============================= */
+body {
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 24px;
+
+    font-family: 'Inter', sans-serif;
+
+    background:
+        radial-gradient(circle at top left, rgba(59,130,246,0.25), transparent 30%),
+        radial-gradient(circle at bottom right, rgba(30,64,175,0.25), transparent 30%),
+        linear-gradient(135deg, #020617 0%, #0f172a 45%, #111827 100%);
+
+    overflow: hidden;
+    color: #f8fafc;
+
+    position: relative;
+}
+
+/* ============================= */
+/*      BACKGROUND GLOW          */
+/* ============================= */
+body::before,
+body::after {
+    content: "";
+
+    position: absolute;
+
+    width: 420px;
+    height: 420px;
+
+    border-radius: 50%;
+
+    filter: blur(90px);
+
+    z-index: 0;
+}
+
+body::before {
+    background: rgba(37, 99, 235, 0.18);
+
+    top: -120px;
+    left: -100px;
+}
+
+body::after {
+    background: rgba(59, 130, 246, 0.12);
+
+    bottom: -140px;
+    right: -100px;
+}
+
+/* ============================= */
+/*             FORM              */
+/* ============================= */
+form {
+    width: 100%;
+    max-width: 440px;
+
+    position: relative;
+    z-index: 2;
+
+    padding: 42px;
+
+    border-radius: 28px;
+
+    background: rgba(15, 23, 42, 0.72);
+
+    backdrop-filter: blur(18px);
+
+    border: 1px solid rgba(255,255,255,0.08);
+
+    box-shadow:
+        0 10px 35px rgba(0,0,0,0.45),
+        inset 0 1px 0 rgba(255,255,255,0.03);
+
+    animation: formAppear 0.6s ease;
+}
+
+/* ============================= */
+/*            TITLE              */
+/* ============================= */
+form::before {
+    content: "Создание аккаунта";
+
+    display: block;
+
+    text-align: center;
+
+    font-size: 30px;
+    font-weight: 700;
+
+    margin-bottom: 34px;
+
+    letter-spacing: -0.5px;
+
+    color: #ffffff;
+}
+
+/* ============================= */
+/*        FIELD WRAPPER          */
+/* ============================= */
+form > div {
+    margin-bottom: 22px;
+}
+
+/* ============================= */
+/*            LABELS             */
+/* ============================= */
+label {
+    display: block;
+
+    margin-bottom: 10px;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    color: #cbd5e1;
+}
+
+/* ============================= */
+/*            INPUTS             */
+/* ============================= */
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+
+    padding: 15px 16px;
+
+    border-radius: 16px;
+
+    border: 1px solid rgba(255,255,255,0.08);
+
+    background: rgba(15, 23, 42, 0.95);
+
+    color: #f8fafc;
+
+    font-size: 15px;
+
+    transition:
+        border-color 0.25s ease,
+        transform 0.2s ease,
+        box-shadow 0.25s ease,
+        background 0.25s ease;
+
+    outline: none;
+}
+
+/* ============================= */
+/*         PLACEHOLDER           */
+/* ============================= */
+input::placeholder {
+    color: #64748b;
+}
+
+/* ============================= */
+/*            FOCUS              */
+/* ============================= */
+input:focus {
+    border-color: #3b82f6;
+
+    background: rgba(15, 23, 42, 1);
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 0 0 4px rgba(59,130,246,0.14),
+        0 0 24px rgba(59,130,246,0.16);
+}
+
+/* ============================= */
+/*        SUBMIT BUTTON          */
+/* ============================= */
+input[type="submit"] {
+    width: 100%;
+
+    margin-top: 8px;
+
+    padding: 15px;
+
+    border: none;
+    border-radius: 16px;
+
+    background: linear-gradient(
+        135deg,
+        #2563eb,
+        #3b82f6
+    );
+
+    color: white;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.25s ease,
+        opacity 0.2s ease;
+}
+
+/* ============================= */
+/*          BUTTON HOVER         */
+/* ============================= */
+input[type="submit"]:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 25px rgba(37,99,235,0.35);
+}
+
+/* ============================= */
+/*          BUTTON ACTIVE        */
+/* ============================= */
+input[type="submit"]:active {
+    transform: scale(0.98);
+}
+
+/* ============================= */
+/*            ERRORS             */
+/* ============================= */
+.error {
+    margin-top: 8px;
+
+    padding-left: 4px;
+
+    color: #f87171;
+
+    font-size: 13px;
+
+    animation: errorAppear 0.3s ease;
+}
+
+/* ============================= */
+/*          ANIMATIONS           */
+/* ============================= */
+@keyframes formAppear {
+    from {
+        opacity: 0;
+        transform: translateY(18px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes errorAppear {
+    from {
+        opacity: 0;
+        transform: translateY(-3px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============================= */
+/*         RESPONSIVE            */
+/* ============================= */
+@media (max-width: 520px) {
+    form {
+        padding: 30px 24px;
+        border-radius: 24px;
+    }
+
+    form::before {
+        font-size: 25px;
+        margin-bottom: 28px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+        padding: 14px;
+    }
+}
+```
