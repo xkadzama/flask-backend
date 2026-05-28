@@ -8,6 +8,7 @@
 {% if task_one %}
     <h2> {{ task_one.title }} </h2>
     <p> Описание: <i>{{ task_one.description }} </i></p>
+    <p>Автор: {{ current_user.username }}</p>
     <form action="{{ url_for('tasks.delete_task', id=task_one.id) }}" method="POST">
         <button> Удалить задачу </button>
     </form>

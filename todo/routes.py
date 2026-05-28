@@ -10,15 +10,15 @@ task_bp = Blueprint('tasks', __name__, template_folder='templates')
 @task_bp.route('/')
 @login_required
 def get_all_tasks():
-    tasks = Task.query.all() # <---
+    tasks = Task.query.filter_by(user_id=current_user.id).all()
     return render_template('all_tasks.html', tasks_db=tasks)
 
 
 @task_bp.route('/read/<int:id>')
 @login_required
 def task_detail(id):
-    task_one = Task.query.filter_by(id=id).first() # <---
-    return render_template('detail.html', task_one=task_one)
+    task_one = Task.query.filter_by(id=id, user_id=current_user.id).first()
+    return render_template('detail.html', task_one=task_one, current_user=current_user)
 
 
 @task_bp.route('/add', methods=['GET', 'POST'])
@@ -27,7 +27,7 @@ def add_task():
     if request.method == 'POST':
         title = request.form.get('title')
         description = request.form.get('description')
-        task = Task(title=title, description=description)
+        task = Task(title=title, description=description, user_id=current_user.id)
         db.session.add(task)
         db.session.commit()
         return redirect(url_for('tasks.get_all_tasks'))
@@ -37,7 +37,7 @@ def add_task():
 @task_bp.route('/update/<int:id>', methods=['GET', 'POST'])
 @login_required
 def update_task(id):
-    task_one = Task.query.filter_by(id=id).first() # <---
+    task_one = Task.query.filter_by(id=id, user_id=current_user.id).first() # <---
     if request.method == 'POST':
         title = request.form.get('title')
         description = request.form.get('description')
@@ -53,7 +53,7 @@ def update_task(id):
 @task_bp.route('/delete/<int:id>', methods=['POST'])
 @login_required
 def delete_task(id): # <---
-    task = Task.query.filter_by(id=id).first()  # <---
+    task = Task.query.filter_by(id=id, user_id=current_user.id).first()  # <---
     db.session.delete(task)  # <---
     db.session.commit()  # <---
     return redirect(url_for('tasks.get_all_tasks'))
