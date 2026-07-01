@@ -2,6 +2,7 @@ import os
 
 from flask import Flask, render_template
 from flask_login import LoginManager, current_user
+from dotenv import load_dotenv
 
 from todo.routes import task_bp
 from auth.routes import auth_bp
@@ -13,15 +14,16 @@ from database.models.auth import User
 
 app = Flask(__name__)
 login_manager = LoginManager()
+load_dotenv()
 
-
-POSTGRES_USER = os.getenv('POSTGRES_USER', 'admin')
+POSTGRES_USER = os.getenv('POSTGRES_USER', 'postgres')
 POSTGRES_PASSWORD = os.getenv('POSTGRES_PASSWORD', '123')
 POSTGRES_DB = os.getenv('POSTGRES_DB', 'database')
+POSTGRES_ADDRESS = os.getenv('POSTGRES_ADDRESS', 'localhost')
 
-app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@db:5432/{POSTGRES_DB}'
+app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_ADDRESS}:5432/{POSTGRES_DB}'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SECRET_KEY'] = '773uwgfhadgfhegf'
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 
 
 db.init_app(app)
@@ -47,4 +49,4 @@ def main():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=8000)
+    app.run(host='0.0.0.0', port=8000)

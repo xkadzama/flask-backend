@@ -20,6 +20,7 @@ pluggy==1.6.0
 psycopg2-binary==2.9.12
 Pygments==2.20.0
 pytest==9.1.1
+python-dotenv==1.2.2
 requests==2.34.2
 SQLAlchemy==2.0.51
 typing_extensions==4.15.0
