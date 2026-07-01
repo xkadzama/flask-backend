@@ -19,7 +19,7 @@ services:
       - postgres_data:/var/lib/postgresql/data
 
   migrations:
-    build: .
+    image: xxoce/migrations:latest
     container_name: migrations
     command: alembic upgrade head
     environment:
@@ -34,7 +34,7 @@ services:
         condition: service_healthy
 
   backend:
-    build: .
+    image: xxoce/backend:latest
     container_name: backend
     command: python app.py
     environment:
